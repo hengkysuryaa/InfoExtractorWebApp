@@ -1,6 +1,4 @@
 from nltk.tokenize import sent_tokenize
-with open('text.txt', 'r') as file:
-    text = file.read().replace('\n', ' ')
 
 def bmsearch(text, pattern):
 

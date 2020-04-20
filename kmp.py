@@ -1,8 +1,5 @@
 from nltk.tokenize import sent_tokenize
 
-with open('text.txt', 'r') as file:
-    text = file.read().replace('\n', ' ')
-
 def kmpsearch(text, pattern):
     n = len(text) # panjang text
     m = len(pattern) # panjang pattern
