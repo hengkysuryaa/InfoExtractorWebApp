@@ -52,4 +52,4 @@ def main(text, pattern):
         if (pos != -1):
             print(kal)
     
-main(text, "Terkonfirmasi Positif")
+#main(text, "Terkonfirmasi Positif")

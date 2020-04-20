@@ -3,16 +3,17 @@ from nltk.tokenize import sent_tokenize
 import kmp
 import bm
 
-with open('text.txt', 'r') as file:
-    text = file.read().replace('\n', ' ')
 
-sentences = sent_tokenize(text)
 
 app = Flask(__name__)
 
 @app.route("/", methods=["GET","POST"])
 def home():
     if request.method == "POST":
+        uploaded_files = request.form.getlist("file[]")
+        with open(uploaded_files[0], 'r') as file:
+            text = file.read().replace('\n', ' ')
+            sentences = sent_tokenize(text)
         keyword = request.form.get("keyword")
         algo = request.form.get("algorithm")
         for kal in sentences:

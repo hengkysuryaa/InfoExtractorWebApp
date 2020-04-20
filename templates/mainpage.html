@@ -5,9 +5,10 @@
     </head>
     <body>
         <h1> <center> My InfoExtraction App </center>  </h1>
-        <p> Folder: </p>
-        <p> Keyword: </p>
         <form method="POST" action="/">
+        <p> Folder: </p>
+            <input type="file" name="file[]" multiple="">
+        <p> Keyword: </p>
             <input type="text" name="keyword"> 
             <p> Algoritma: </p>
             <input type="radio" id="bm" name="algorithm" value="bm">
@@ -16,7 +17,7 @@
             <label for="kmp">KMP</label><br>
             <input type="radio" id="regex" name="algorithm" value="regex">
             <label for="regex">Regex</label> <br> <br>
-            <input type="submit" name="button">
+            <input type="submit" name="submitbutton">
         </form> 
         <p> --------------------</p>
         <a href="/about"> About </a>
