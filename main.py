@@ -1,4 +1,12 @@
 from flask import Flask, render_template, request
+from nltk.tokenize import sent_tokenize
+import kmp
+import bm
+
+with open('text.txt', 'r') as file:
+    text = file.read().replace('\n', ' ')
+
+sentences = sent_tokenize(text)
 
 app = Flask(__name__)
 
@@ -7,8 +15,17 @@ def home():
     if request.method == "POST":
         keyword = request.form.get("keyword")
         algo = request.form.get("algorithm")
-        print(keyword)
-        print(algo) 
+        for kal in sentences:
+            if (algo == "kmp"):
+                pos = kmp.kmpsearch(kal, keyword)
+                if (pos != -1):
+                    print(kal)
+            if (algo == "bm"):
+                pos = bm.bmsearch(kal, keyword)
+                if (pos != -1):
+                    print(kal)
+            if (algo == "regex"):
+                print("regex")
     return render_template("mainpage.html")
 
 @app.route("/about")

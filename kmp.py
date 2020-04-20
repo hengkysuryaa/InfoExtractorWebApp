@@ -3,7 +3,7 @@ from nltk.tokenize import sent_tokenize
 with open('text.txt', 'r') as file:
     text = file.read().replace('\n', ' ')
 
-def kmp(text, pattern):
+def kmpsearch(text, pattern):
     n = len(text) # panjang text
     m = len(pattern) # panjang pattern
 
@@ -48,7 +48,7 @@ def fail(pattern):
 def main(text, pattern):
     sentences = sent_tokenize(text)
     for kal in sentences:
-        pos = kmp(kal, pattern)
+        pos = kmpsearch(kal, pattern)
         if (pos != -1):
             print(kal)
     

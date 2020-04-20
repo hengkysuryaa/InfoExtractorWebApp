@@ -2,7 +2,7 @@ from nltk.tokenize import sent_tokenize
 with open('text.txt', 'r') as file:
     text = file.read().replace('\n', ' ')
 
-def bm (text, pattern):
+def bmsearch(text, pattern):
 
     last = buildLast(pattern) 
     n = len(text) # panjang text
@@ -39,7 +39,7 @@ def buildLast(pattern):
 def main(text, pattern):
     sentences = sent_tokenize(text)
     for kal in sentences:
-        pos = bm(kal, pattern)
+        pos = bmsearch(kal, pattern)
         if (pos != -1):
             print(kal)
     
