@@ -1,7 +1,7 @@
 import re
 
 def searchangka(text):
-    angka = re.findall(r'\s\d+[\,\.\d]\d*\s|^\d+\s', text)
+    angka = re.findall(r'\s\d*[\,\.\d]\d*\s|^\d+\s', text)
     return angka
 
 def searchtanggal(text):
