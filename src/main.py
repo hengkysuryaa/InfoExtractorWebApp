@@ -37,6 +37,7 @@ def home():
                             print('(' + berkas.filename + ')')
                     if (algo == "regex"):
                         print("regex")
+                os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename)) #hapus file yang diupload
                         
     return render_template("mainpage.html")
 
