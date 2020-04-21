@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect
 from nltk.tokenize import sent_tokenize
 import kmp
 import bm
+import nearestUtil
 import regexmatch
 import os
 from werkzeug.utils import secure_filename
@@ -30,36 +31,63 @@ def submit():
                     sentences = sent_tokenize(text) # parsing text menjadi kalimat
                 keyword = request.form.get("keyword") # mengambil keyword masukan
                 algo = request.form.get("algorithm") # mengambil pilihan algoritma
+                tanggal_artikel = regexmatch.searchtanggalartikel(sentences)
                 for kal in sentences: # iterasi setiap kalimat pada text
                     if (algo == "kmp"):
                         pos = kmp.kmpsearch(kal, keyword)
                         if (pos != -1):
-                            angka = regexmatch.searchangka(kal)
+                            listangka = regexmatch.searchangka(kal) # search angka
                             posKeyword = kal.find(keyword)
-                            print(regexmatch.nearestNum(angka,posKeyword,kal))
-                            print(kal, end='')
-                            print('(' + berkas.filename + ')')
+                            angka = nearestUtil.nearestNum(listangka,posKeyword,kal) # angka terdekat
+                            listtanggal = regexmatch.searchtanggal(kal) # search tanggal
+                            if (len(listtanggal) == 0): # tidak ada tanggal di kalimat
+                                tanggal = tanggal_artikel
+                            else:
+                                tanggal = regexmatch.firstTanggal(listtanggal)
+                            kalimat = kal + '(' + berkas.filename + ')'
+                            item = {
+                                    "Jumlah":angka,
+                                    "Waktu":tanggal,
+                                    "Kalimat":kal
+                                    }
+                            list.append(item)
                     if (algo == "bm"):
                         pos = bm.bmsearch(kal, keyword)
                         if (pos != -1):
-                            print(kal, end='')
-                            print('(' + berkas.filename + ')')
+                            listangka = regexmatch.searchangka(kal) # search angka
+                            posKeyword = kal.find(keyword)
+                            angka = nearestUtil.nearestNum(listangka,posKeyword,kal) # angka terdekat
+                            listtanggal = regexmatch.searchtanggal(kal) # search tanggal
+                            if (len(listtanggal) == 0): # tidak ada tanggal di kalimat
+                                tanggal = tanggal_artikel
+                            else:
+                                tanggal = regexmatch.firstTanggal(listtanggal)
+                            kalimat = kal + '(' + berkas.filename + ')'
+                            item = {
+                                    "Jumlah":angka,
+                                    "Waktu":tanggal,
+                                    "Kalimat":kal
+                                    }
+                            list.append(item)
                     if (algo == "regex"):
-                        regexmatch.regexsearch(kal, keyword, berkas.filename, sentences)
+                        pos = regexmatch.regexsearch(kal, keyword)
+                        if (pos != -1):
+                            listangka = regexmatch.searchangka(kal) # search angka
+                            posKeyword = kal.find(keyword)
+                            angka = nearestUtil.nearestNum(listangka,posKeyword,kal) # angka terdekat
+                            listtanggal = regexmatch.searchtanggal(kal) # search tanggal
+                            if (len(listtanggal) == 0): # tidak ada tanggal di kalimat
+                                tanggal = tanggal_artikel
+                            else:
+                                tanggal = regexmatch.firstTanggal(listtanggal)
+                            kalimat = kal + '(' + berkas.filename + ')'
+                            item = {
+                                    "Jumlah":angka,
+                                    "Waktu":tanggal,
+                                    "Kalimat":kal
+                                    }
+                            list.append(item)
                 os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename)) #hapus file yang diupload
-        
-        tes = {
-            "Jumlah":"13",
-            "Waktu":"52",
-            "Kalimat":"haha"
-        }
-        list.append(tes)
-        tes2 = {
-            "Jumlah":"14",
-            "Waktu":"53",
-            "Kalimat" : "hehe"
-        }
-        list.append(tes2)
         return render_template("resultpage.html",list = list)
 
 @app.route("/about")

@@ -23,27 +23,13 @@ def searchtanggalartikel(text):
             found = True # mencari tanggal artikel (di awal teks)
     return tanggalartikel
 
-def regexsearch(kal,pattern,filename,text):
+def regexsearch(kal,pattern):
     if re.search(r'{}'.format(pattern), kal, re.I):
-        angka = searchangka(kal)
-        tanggal = searchtanggal(kal)
-        for ang in angka:
-            print(ang.replace(' ',''))
-        if (len(tanggal) == 0):
-            print(searchtanggalartikel(text))
-        else:
-            for tang in tanggal:
-                print(tang)
-        print(kal,end='')
-        print('(' + filename + ')')
+        return 1
+    else:
+        return -1
 
-def nearestNum(listangka,posKeyword,kal):
-    nearposAng = -1
-    nearAng = ''
-    for ang in listangka:
-        ang.replace(' ','')
-        posAng = kal.rfind(ang,0,posKeyword)
-        if (posAng > nearposAng):
-            nearAng = ang
-            nearposAng = posAng
-    return kal[nearposAng:(nearposAng+len(nearAng))].replace(' ','')
+def firstTanggal(listTanggal):
+    for tang in listTanggal:
+        return tang
+        break
