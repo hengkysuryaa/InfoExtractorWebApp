@@ -1,5 +1,3 @@
-from nltk.tokenize import sent_tokenize
-
 def bmsearch(text, pattern):
 
     last = buildLast(pattern) 
@@ -33,12 +31,3 @@ def buildLast(pattern):
         last[ord(pattern[i].casefold())] = i
     
     return last
-
-def main(text, pattern):
-    sentences = sent_tokenize(text)
-    for kal in sentences:
-        pos = bmsearch(kal, pattern)
-        if (pos != -1):
-            print(kal)
-    
-#main(text, "Terkonfirmasi Positif")

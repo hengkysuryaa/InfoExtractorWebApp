@@ -1,5 +1,3 @@
-from nltk.tokenize import sent_tokenize
-
 def kmpsearch(text, pattern):
     n = len(text) # panjang text
     m = len(pattern) # panjang pattern
@@ -24,7 +22,7 @@ def kmpsearch(text, pattern):
 
 def fail(pattern):
 
-    list = [0] * (len(pattern)-1) # inisialisasi tabel
+    list = [0] * (len(pattern)) # inisialisasi tabel
 
     m = len(pattern)
     j = 0
@@ -41,12 +39,3 @@ def fail(pattern):
             i += 1
 
     return list
-
-def main(text, pattern):
-    sentences = sent_tokenize(text)
-    for kal in sentences:
-        pos = kmpsearch(kal, pattern)
-        if (pos != -1):
-            print(kal)
-    
-#main(text, "Terkonfirmasi Positif")
