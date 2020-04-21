@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from nltk.tokenize import sent_tokenize
 import kmp
 import bm
+import regexmatch
 import os
 from werkzeug.utils import secure_filename
 
@@ -36,7 +37,7 @@ def home():
                             print(kal, end='')
                             print('(' + berkas.filename + ')')
                     if (algo == "regex"):
-                        print("regex")
+                        regexmatch.regexsearch(kal, keyword, berkas.filename, sentences)
                 os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename)) #hapus file yang diupload
                         
     return render_template("mainpage.html")
