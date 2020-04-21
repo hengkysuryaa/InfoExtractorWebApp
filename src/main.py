@@ -44,11 +44,11 @@ def submit():
                                 tanggal = tanggal_artikel
                             else:
                                 tanggal = regexmatch.firstTanggal(listtanggal)
-                            kalimat = kal + '(' + berkas.filename + ')'
+                            kalimat = kal + ' (' + berkas.filename + ')'
                             item = {
                                     "Jumlah":angka,
                                     "Waktu":tanggal,
-                                    "Kalimat":kal
+                                    "Kalimat":kalimat
                                     }
                             list.append(item)
                     if (algo == "bm"):
@@ -62,11 +62,11 @@ def submit():
                                 tanggal = tanggal_artikel
                             else:
                                 tanggal = regexmatch.firstTanggal(listtanggal)
-                            kalimat = kal + '(' + berkas.filename + ')'
+                            kalimat = kal + ' (' + berkas.filename + ')'
                             item = {
                                     "Jumlah":angka,
                                     "Waktu":tanggal,
-                                    "Kalimat":kal
+                                    "Kalimat":kalimat
                                     }
                             list.append(item)
                     if (algo == "regex"):
@@ -80,15 +80,15 @@ def submit():
                                 tanggal = tanggal_artikel
                             else:
                                 tanggal = regexmatch.firstTanggal(listtanggal)
-                            kalimat = kal + '(' + berkas.filename + ')'
+                            kalimat = kal + ' (' + berkas.filename + ')'
                             item = {
                                     "Jumlah":angka,
                                     "Waktu":tanggal,
-                                    "Kalimat":kal
+                                    "Kalimat":kalimat
                                     }
                             list.append(item)
                 os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename)) #hapus file yang diupload
-        return render_template("resultpage.html",list = list)
+        return render_template("mainpage.html",list = list)
 
 @app.route("/about")
 def about():

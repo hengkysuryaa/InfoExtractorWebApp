@@ -19,6 +19,12 @@
             <label for="regex">Regex</label> <br> <br>
             <input type="submit" name="submitbutton">
         </form>
+        {% for data in list %}
+            {% for key, values in data.items() %}
+            <p> {{key}} : {{values}} </p>
+            {% endfor %}
+        <p> ---------------------------- </p>
+        {% endfor %}
         <p> --------------------</p>
         <a href="/about"> About </a>
     </body>
