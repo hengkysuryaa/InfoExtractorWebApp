@@ -2,13 +2,6 @@ import re
 
 def searchangka(text):
     angka = re.findall(r'\s\d+[\,\.\d]\d*\s|^\d+\s', text)
-    #'\d+[\,\.\d]\d*\s|\d+\s'
-    # ([^\d]|^)\d{1,}[,.]\d{1,}([^\d]|$) --
-    # ((\d|^)\d{0,}([^\d]|$))
-    # ((\d|^)\d{0,})
-    # (\s(\d|^)\d{0,}\s) --
-    # ^\d+
-
     return angka
 
 def searchtanggal(text):
